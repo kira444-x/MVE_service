@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/MVE_service/MVE_img/MVE_logo.png">
+  <title>MVE Service - Hygiène et Lutte Antiparasitaire</title>
+  <!-- Consider linking Font Awesome or another icon library if you want richer icons -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    h2, h4 {
+      margin-bottom: 1rem;
+      color: #dfdfdf;
+    }
+    h3{
+      color: #374151;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #6b7280; /* Slightly lighter default paragraph color */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%; /* Use percentage padding for better fluidity */
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-heading h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      color: #1f2937; /* Ensure heading color consistency */
+    }
+
+    .section-heading h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: #4CAF50; /* Main accent color */
+    }
+
+    .section-heading p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 1rem auto 0; /* Add top margin for spacing */
+      color: #6b7280;
+    }
+
+    section {
+      padding: 5rem 0;
+      overflow: hidden; /* Prevent content overflow issues */
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Ensure text is centered */
+    }
+
+    .btn:hover {
+      background-color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid #4CAF50;
+      color: #4CAF50;
+    }
+
+    .btn-outline:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Header and Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000; /* Ensure header is above other content */
+      width: 100%; /* Ensure header spans full width */
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px; /* Max width for nav content */
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0; /* Prevent logo from shrinking */
+    }
+
+    .logo img {
+      height: 50px;
+      /* Add max-width to prevent image distortion if needed */
+      max-width: 100%;
+    }
+
+    /* Desktop Navigation */
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+      white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .desktop-nav a:hover {
+      color: #4CAF50;
+    }
+
+    .desktop-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #4CAF50;
+      transition: width 0.3s ease;
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a.active::after { /* Style for active link */
+      width: 100%;
+    }
+
+    .desktop-nav a.active { /* Style for active link */
+       color: #4CAF50;
+    }
+
+    /* Different variable name to avoid conflict */
+    .desktop-nav a.nav-cta {
+      background-color: #4CAF50;
+      color: white !important; /* Ensure white text */
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .desktop-nav a.nav-cta:hover {
+      background-color: #3e8e41;
+      box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .desktop-nav a.nav-cta::after {
+      display: none; /* No underline for CTA */
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none; /* Hidden by default */
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      z-index: 1001; /* Above mobile menu background */
+    }
+
+    /* Hamburger Icon Styles */
+    .hamburger-icon {
+      position: relative;
+      width: 24px;
+      height: 18px; /* Total height of the 3 bars */
+    }
+
+    .hamburger-icon span {
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background-color: #333;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-icon span:nth-child(1) { top: 0; }
+    .hamburger-icon span:nth-child(2) { top: 8px; } /* Middle bar */
+    .hamburger-icon span:nth-child(3) { top: 16px; } /* Bottom bar */
+
+    /* X Animation when active */
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.active .hamburger-icon span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none; /* Hidden by default */
+      position: absolute; /* Position relative to header */
+      top: 100%; /* Position below the header */
+      left: 0;
+      right: 0;
+      background-color: white;
+      border-top: 1px solid #eee;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      /* Smooth transition */
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+      padding: 0 1rem; /* Add padding when open */
+    }
+
+    .mobile-menu.active {
+      display: block; /* Show the menu */
+      max-height: 500px; /* Allow height to expand */
+      padding: 1rem; /* Add padding when open */
+    }
+
+    .mobile-menu a {
+      display: block; /* Stack links vertically */
+      padding: 1rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center; /* Center text */
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-menu a:hover {
+      background-color: #f9f9f9;
+      color: #4CAF50;
+    }
+
+    .mobile-menu a.active { /* Style for active link in mobile */
+       color: #4CAF50;
+       background-color: #f0f9f0; /* Light green background */
+    }
+
+    .mobile-menu a.nav-cta { /* Consistent CTA naming */
+      background-color: #4CAF50;
+      color: white !important; /* Ensure white text */
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 30px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .mobile-menu a.nav-cta:hover {
+        background-color: #3e8e41;
+    }
+
+
+    /* Hero Section */
+    
+    .hero-container {
+            height: 100vh; /* Full viewport height */
+            min-height: 600px; /* Minimum height for content visibility */
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 5%; /* Add padding */
+            overflow: hidden; /* Ensure video doesn't spill out */
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Same opacity as your original gradient */
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1; /* Place content above video and overlay */
+        }
+
+        .main-heading {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            /* Animation setup */
+            transform: translateX(-100%);
+            opacity: 0;
+            animation: slideFromLeft 1s ease-out forwards;
+        }
+
+        .sub-heading {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 800px; /* Limit width */
+            margin-left: auto;
+            margin-right: auto;
+            /* Animation setup */
+            transform: translateX(100%);
+            opacity: 0;
+            animation: slideFromRight 1s ease-out forwards 0.3s; /* Delay */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1rem;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            /* Animation setup */
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards 0.6s; /* Delay */
+        }
+
+        .cta-button:hover {
+            background-color: #3e8e41;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideFromLeft {
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideFromRight {
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+    /* About Section */
+    .about-section {
+      background-color: #f9f9f9;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 3rem; /* Increased gap */
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-around; /* Better distribution */
+      margin-top: 2.5rem; /* Increased margin */
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      gap: 1rem; /* Add gap between items */
+    }
+
+    .stat-item {
+      text-align: center;
+      flex-basis: 150px; /* Base width */
+      flex-grow: 1; /* Allow items to grow */
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4CAF50;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: #6b7280;
+    }
+
+    /* Services Section */
+    #services {
+        background-color: #ffffff; /* White background */
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; /* Use flex for content alignment */
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-image {
+      height: 220px; /* Slightly larger image area */
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.1);
+    }
+
+    .service-content {
+      padding: 1.5rem;
+      flex-grow: 1; /* Allow content to fill space */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem; /* Slightly adjusted size */
+      margin-bottom: 0.8rem;
+      color: #1f2937;
+    }
+
+    .service-card p {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      flex-grow: 1; /* Push button to bottom if needed */
+    }
+
+    .service-card .btn {
+        margin-top: auto; /* Push button to the bottom */
+        align-self: flex-start; /* Align button to the left */
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-section {
+      background-color: #f0fdf4; /* Light green background */
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px); /* Slightly more lift */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      width: 65px; /* Adjusted size */
+      height: 65px;
+      background-color: rgba(76, 175, 80, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      color: #4CAF50;
+      font-size: 1.8rem; /* Icon size */
+      /* Placeholder for icon - use text or font icon */
+      font-weight: bold;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: #1f2937;
+    }
+     .feature-card p {
+        color: #6b7280;
+        font-size: 0.95rem; /* Slightly smaller text */
+     }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      background-color: #ffffff;
+    }
+
+    .testimonials-slider {
+      max-width: 800px; /* Limit width for better readability */
+      margin: 0 auto;
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .testimonials {
+      display: flex;
+      overflow: hidden;
+      width: 100%; /* Ensure container takes full width */
+      position: relative;
+    }
+
+    .testimonial {
+      flex: 0 0 100%; /* Each testimonial takes full width */
+      padding: 2rem 1rem; /* Add padding */
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.5s ease; /* Smooth transition for sliding */
+      opacity: 0; /* Start hidden */
+      position: absolute; /* Position for overlap */
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .testimonial.active {
+        opacity: 1; /* Show active */
+        position: relative; /* Take space in layout */
+        transform: translateX(0);
+    }
+
+    .testimonial-content {
+      position: relative;
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .testimonial-content::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 30px;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      transform: rotate(45deg);
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.03);
+    }
+
+    .testimonial-content p {
+      font-style: italic;
+      color: #6b7280;
+      margin-bottom: 0; /* Remove default margin */
+      line-height: 1.5; /* Adjust line height */
+    }
+    .testimonial-content p::before {
+        content: '“'; /* Opening quote */
+        font-size: 1.5em;
+        margin-right: 0.2em;
+        color: #4CAF50;
+    }
+    .testimonial-content p::after {
+        content: '”'; /* Closing quote */
+        font-size: 1.5em;
+        margin-left: 0.2em;
+        color: #4CAF50;
+    }
+
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      margin-left: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 1rem;
+      border: 3px solid white; /* Optional border */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-info h4 {
+      margin-bottom: 0.25rem;
+      color: #1f2937;
+    }
+
+    .author-info p {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 0; /* Remove default margin */
+    }
+
+    .testimonial-controls {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .testimonial-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: #d1d5db; /* Lighter inactive color */
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+      background-color: #4CAF50;
+      transform: scale(1.2);
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Glow effect */
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+      background: linear-gradient(45deg, #4CAF50, #3e8e41); /* Gradient background */
+      color: white;
+      text-align: center;
+      padding: 5rem 0; /* Increased padding */
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 5%; /* Padding for smaller screens */
+    }
+
+    .cta-content h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600; /* Slightly bolder */
+    }
+
+    .cta-content p {
+      margin-bottom: 2.5rem; /* Increased margin */
+      font-size: 1.1rem;
+      opacity: 0.95; /* Slightly less opaque */
+      color: #f0fdf4; /* Very light green/white */
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem; /* Increased gap */
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background-color: white;
+      color: #4CAF50;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn-white:hover {
+      background-color: #f1f1f1; /* Slightly off-white hover */
+      color: #3e8e41;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .btn-outline-white {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      box-shadow: none; /* No shadow for outline */
+    }
+
+    .btn-outline-white:hover {
+      background-color: white;
+      color: #4CAF50;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(255,255,255,0.1); /* Subtle glow */
+    }
+
+    /* Contact Section */
+     #contact {
+        background-color: #f9fafb; /* Very light grey */
+     }
+    .contact-section .container {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start; /* Align items to the top */
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+    .contact-info h3 {
+        margin-bottom: 2rem; /* Space below heading */
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem; /* Increased gap */
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background-color: #ffffff; /* White cards */
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid #e5e7eb; /* Subtle border */
+    }
+
+    .contact-card:hover {
+      border-color: #4CAF50;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0; /* Prevent icon shrinking */
+      background-color: rgba(76, 175, 80, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4CAF50;
+      font-size: 1.5rem; /* Icon size */
+      transition: all 0.3s ease;
+      /* Placeholder for icon */
+      font-weight: bold;
+    }
+
+    .contact-card:hover .contact-icon {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .contact-text h4 {
+      margin-bottom: 0.25rem;
+      color: #1f2937;
+    }
+
+    .contact-text p, .contact-text a { /* Style links as well */
+      color: #6b7280;
+      margin-bottom: 0; /* Remove default margin */
+      text-decoration: none; /* Remove underline from links */
+      transition: color 0.3s ease;
+    }
+    .contact-card:hover .contact-text p,
+    .contact-card:hover .contact-text a {
+      color: #333;
+    }
+    .contact-card:hover .contact-text a:hover {
+        color: #4CAF50; /* Link hover color */
+    }
+
+
+    .contact-form {
+      flex: 1.5; /* Give form slightly more space */
+      background-color: white;
+      border-radius: 8px;
+      padding: 2.5rem; /* Increased padding */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+     .contact-form h3 {
+         margin-bottom: 2rem; /* Space below heading */
+     }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #374151; /* Slightly darker label color */
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1rem; /* Slightly larger padding */
+      border: 1px solid #d1d5db; /* Standard border */
+      border-radius: 6px; /* Slightly more rounded */
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: #f9fafb; /* Light background for input */
+    }
+
+     .form-control::placeholder {
+         color: #9ca3af; /* Placeholder color */
+     }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+      background-color: white; /* White background on focus */
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-submit-btn {
+        width: 100%; /* Make button full width */
+        padding: 1rem; /* Larger padding */
+        font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1f2937; /* Dark background */
+      color: #d1d5db; /* Lighter text color */
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem; /* Increased gap */
+      margin-bottom: 3rem; /* Increased margin */
+    }
+
+    .footer-column h3 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem; /* Space for underline */
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4CAF50;
+    }
+
+    .footer-column p {
+      color: #9ca3af; /* Slightly dimmer paragraph */
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .footer-logo img {
+        max-width: 150px; /* Limit logo size in footer */
+        margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem; /* Adjusted spacing */
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block; /* Needed for transform */
+    }
+
+    .footer-links a::before {
+      content: '→'; /* Arrow character */
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+      color: #4CAF50; /* Arrow color */
+    }
+
+    .footer-links a:hover {
+      color: #ffffff; /* Brighter hover color */
+      transform: translateX(5px); /* Move text slightly */
+    }
+
+    .footer-links a:hover::before {
+        /* Optional: change arrow on hover */
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem; /* Add space above social links */
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem; /* Icon size */
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background-color: #4CAF50;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+     /* Add simple text placeholders if not using icon font */
+    .social-link.fb::before { content: 'f'; font-weight: bold; }
+    .social-link.tw::before { content: 't'; font-weight: bold; }
+    .social-link.in::before { content: 'in'; font-size: 0.9em; font-weight: bold; }
+
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem; /* Ensure space above */
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+    .footer-bottom a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+    .footer-bottom a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 992px) {
+      .container {
+          padding: 0 4%; /* Adjust padding */
+      }
+      .desktop-nav {
+        gap: 1.2rem;
+      }
+      .desktop-nav a.nav-cta {
+        padding: 0.6rem 1.2rem;
+      }
+      .about-content {
+        flex-direction: column;
+        gap: 2rem; /* Adjust gap for column layout */
+      }
+      .contact-section .container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .contact-form {
+          flex: auto; /* Reset flex factor */
+      }
+      .main-heading {
+        font-size: 2.8rem;
+      }
+      .sub-heading {
+          font-size: 1.4rem;
+      }
+      .footer-content {
+          gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none; /* Hide desktop nav */
+      }
+      .mobile-menu-btn {
+        display: flex; /* Show mobile menu button */
+        align-items: center;
+        justify-content: center;
+      }
+      nav {
+          padding: 0.8rem 5%; /* Adjust nav padding */
+      }
+       .logo img {
+            height: 45px; /* Slightly smaller logo */
+        }
+      section {
+          padding: 4rem 0; /* Reduce section padding */
+      }
+      .main-heading {
+        font-size: 2.2rem;
+      }
+      .sub-heading {
+        font-size: 1.2rem;
+      }
+      .section-heading h2 {
+        font-size: 2rem;
+      }
+      .stats-row {
+          justify-content: center; /* Center stats when wrapping */
+      }
+      .stat-item {
+        flex-basis: 120px; /* Adjust base width */
+        margin-bottom: 1rem; /* Add margin when stacking */
+      }
+      .feature-card {
+        padding: 1.5rem;
+      }
+      .testimonials-slider {
+          padding: 1rem 0;
+      }
+       .testimonial {
+           padding: 1.5rem 0.5rem;
+       }
+      .cta-content h2 {
+          font-size: 2rem;
+      }
+       .footer-content {
+           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Allow more flexible wrapping */
+       }
+    }
+
+    @media (max-width: 576px) {
+        .container {
+            padding: 0 5%; /* Standard padding for smallest screens */
+        }
+      .main-heading {
+        font-size: 1.8rem;
+        line-height: 1.3; /* Improve line height */
+      }
+      .sub-heading {
+        font-size: 1.1rem; /* Adjusted size */
+        line-height: 1.4;
+      }
+      .cta-button {
+        padding: 12px 28px; /* Adjusted padding */
+        font-size: 1rem;
+      }
+      .section-heading h2 {
+        font-size: 1.8rem;
+      }
+       .section-heading p {
+           font-size: 1rem;
+       }
+      .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center; /* Center buttons when stacked */
+      }
+      .cta-buttons .btn {
+          width: 80%; /* Limit button width */
+          max-width: 300px;
+      }
+      .services-grid {
+        grid-template-columns: 1fr; /* Stack service cards */
+        gap: 1.5rem;
+      }
+      .features-grid {
+          grid-template-columns: 1fr; /* Stack feature cards */
+          gap: 1.5rem;
+      }
+       .testimonial-content p::before,
+       .testimonial-content p::after {
+           font-size: 1.2em; /* Smaller quotes */
+       }
+       .contact-form {
+           padding: 1.5rem; /* Reduce form padding */
+       }
+       .footer-content {
+           text-align: center; /* Center footer columns */
+       }
+       .footer-column h3::after {
+           left: 50%; /* Center underline */
+           transform: translateX(-50%);
+       }
+       .footer-links {
+           padding-left: 0; /* Remove padding for centered text */
+       }
+        .footer-links a::before {
+            margin-right: 5px;
+        }
+        .footer-links a:hover {
+            transform: none; /* Disable hover transform */
+        }
+       .social-links {
+           justify-content: center; /* Center social links */
+       }
+    }
+
+    /* Fix for very small screens to ensure buttons/nav don't wrap awkwardly */
+    @media (max-width: 400px) {
+      nav {
+        padding: 0.8rem 3%; /* Further reduce nav padding */
+      }
+      .logo img {
+        height: 40px; /* Smaller logo */
+      }
+      .main-heading {
+        font-size: 1.6rem;
+      }
+      .sub-heading {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#" class="logo" aria-label="MVE Service Accueil">
+        <!-- Use a placeholder or your actual logo URL -->
+        <img src="/MVE_service/MVE_img/MVE_logo.png" alt="M.V.E SERVICE Logo">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        <a href="#" class="active">Accueil</a> <!-- Add 'active' class to current page -->
+        <a href="#about">À Propos</a>
+        <a href="#services">Services</a>
+        <a href="#why-choose">Pourquoi Nous</a>
+        <a href="#testimonials">Témoignages</a>
+        <a href="#contact" class="nav-cta">Obtenir un Devis</a>
+      </div>
+
+      <!-- Mobile Menu Toggle with Animated Burger Icon -->
+      <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
+        <div class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Dropdown -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#" class="active">Accueil</a>
+      <a href="#about">À Propos</a>
+      <a href="#services">Services</a>
+      <a href="#why-choose">Pourquoi Nous</a>
+      <a href="#testimonials">Témoignages</a>
+      <a href="#contact" class="nav-cta">Obtenir un Devis</a>
+    </div>
+  </header>
+
+  <main> <!-- Wrap main content in <main> tag -->
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-container">
+      <!-- Video Background -->
+      <video class="video-background" autoplay muted>
+          <!-- Replace with your actual video path -->
+          <source src="/MVE_service/MVE_video/background-video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+      <!-- Overlay to darken video -->
+      <div class="overlay"></div>
+      
+      <div class="content-wrapper">
+          <h1 class="main-heading">Votre expert en hygiène et lutte antiparasitaire</h1>
+          <h2 class="sub-heading">Solutions professionnelles pour un environnement propre, sain et sécurisé, adaptées à tous vos besoins.</h2>
+          <a href="#contact" class="cta-button">Demandez votre Devis Gratuit</a>
+      </div>
+  </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>À Propos de MVE Service</h2>
+          <p>Votre partenaire de confiance pour garantir un environnement sain et sans nuisibles depuis plus de 5 ans.</p>
+        </div>
+
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Notre Engagement : Expertise & Confiance</h3>
+            <p>Forts d'une solide expérience dans le domaine de l'hygiène et de la lutte antiparasitaire, <strong>MVE Service</strong>  s'engage à fournir des solutions efficaces, durables et respectueuses de l'environnement. Nous protégeons votre santé, votre propriété et votre tranquillité d'esprit.</p>
+            <p>Notre équipe qualifiée et certifiée utilise des méthodes de pointe et des produits homologués pour éliminer tous types de nuisibles (rongeurs, insectes, volatiles) tout en préservant votre environnement et celui de vos proches.</p>
+
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Années d'expérience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Clients Satisfaits</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">Certifié</div>
+                <div class="stat-label">CertiBiocide</div>
+              </div>
+               <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Intervention Rapide</div>
+              </div>
+            </div>
+             <a href="#contact" class="btn" style="margin-top: 2rem;">En Savoir Plus</a>
+          </div>
+
+          <div class="about-image">
+            <img src="/MVE_service/MVE_img/image-asset.jpeg" alt="Équipe MVE Service en intervention d'hygiène">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Nos Services Professionnels</h2>
+          <p>Des solutions expertes en dératisation, nettoyage et entretien des espaces verts pour un environnement propre et sain.</p>
+        </div>
+        <div class="services-grid">
+          <!-- Service Card 1 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img src="/MVE_service/MVE_img/unrecognizable-person-white-chemical-protection-suit-doing-disinfection-public-areas-stop-spreading-highly-contagious-corona-virus.jpg" alt="Service de Dératisation">
+            </div>
+            <div class="service-content">
+              <h3>Dératisation</h3>
+              <p>Élimination efficace et durable des rats, souris et autres rongeurs grâce à des solutions adaptées aux particuliers et aux professionnels. Sécurité et prévention garanties.</p>
+              <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+          <!-- Service Card 2 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img src="/MVE_service/MVE_img/close-up-hand-with-rubber-glove-cleaning-window.jpg">
+            </div>
+            <div class="service-content">
+              <h3>Nettoyage
+              </h3>
+              <p>Services de nettoyage professionnels pour bureaux, commerces et habitations. Des solutions sur mesure pour un environnement propre, sain et agréable.</p>
+               <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+          <!-- Service Card 3 -->
+          <div class="service-card">
+            <div class="service-image">
+              <img src="/MVE_service/MVE_img/gardener-with-weedwacker-cutting-grass-garden.jpg">
+            </div>
+            <div class="service-content">
+              <h3>Jardinage</h3>
+              <p>Entretien et aménagement des espaces verts : tonte, taille, arrosage et plantation. Offrez à vos jardins une beauté durable avec des soins adaptés.</p>
+               <!-- <a href="#" class="btn btn-outline">Détails</a> -->
+            </div>
+          </div>
+        </div>
+         <div style="text-align: center; margin-top: 3rem;">
+             <a href="#contact" class="btn">Voir toutes nos prestations</a>
+         </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Pourquoi Choisir MVE Service ?</h2>
+          <p>Nous nous engageons à fournir un service exceptionnel, rapide et discret.</p>
+        </div>
+        <div class="features-grid">
+          <!-- Feature Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">✔</div> <!-- Placeholder Icon -->
+            <h3>Intervention Rapide</h3>
+            <p>Nous intervenons rapidement au Maroc, souvent dans la journée, en utilisant des produits biocides respectueux de l'environnement et sans danger pour les occupants.</p>
+          </div>
+          <!-- Feature Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">⭐</div> <!-- Placeholder Icon -->
+            <h3>Techniciens Qualifiés & Certifiés</h3>
+            <p>Nos techniciens, formés et certifiés (CertiBiocide), vous garantissent des interventions professionnelles, efficaces et sécurisées</p>
+          </div>
+          <!-- Feature Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">💲</div> <!-- Placeholder Icon -->
+            <h3>Devis Gratuit & Prix Justes</h3>
+            <p>Nous offrons des devis clairs et détaillés sans engagement, avec des tarifs compétitifs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Ce que disent nos clients</h2>
+                <p>La satisfaction de nos clients est notre meilleure publicité.</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonials" id="testimonial-list">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial active">
+                        <div class="testimonial-content">
+                            <p>Intervention très rapide et efficace contre des cafards dans notre restaurant. Professionnels et discrets. Je recommande vivement MVE Service !</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://via.placeholder.com/80x80/777777/FFFFFF?text=A" alt="Avatar client 1">
+                            </div>
+                            <div class="author-info">
+                                <h4>Alain D.</h4>
+                                <p>Restaurateur, Paris 15e</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>Nous avions un problème de punaises de lit tenace. MVE Service a résolu le problème en deux interventions. Un grand soulagement, merci !</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://via.placeholder.com/80x80/cccccc/FFFFFF?text=S" alt="Avatar client 2">
+                            </div>
+                            <div class="author-info">
+                                <h4>Sophie L.</h4>
+                                <p>Particulier, Boulogne-Billancourt</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>Service de dératisation impeccable pour notre syndic. Technicien ponctuel, explications claires et suivi sérieux. Nous continuons avec eux.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://via.placeholder.com/80x80/bbbbbb/FFFFFF?text=M" alt="Avatar client 3">
+                            </div>
+                            <div class="author-info">
+                                <h4>Marc T.</h4>
+                                <p>Gestionnaire de Copropriété, Versailles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls" id="testimonial-dots">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Prêt à retrouver un environnement sain ?</h2>
+          <p>Contactez <strong>MVE Service</strong>  dès aujourd'hui pour une évaluation gratuite de vos besoins et un devis personnalisé sans engagement.</p>
+          <div class="cta-buttons">
+            <a href="#contact" class="btn btn-white">Demander un Devis Gratuit</a>
+            <a href="tel:+212 650-649109" class="btn btn-outline-white">Appelez-nous : +212 650-649109</a> <!-- Replace with actual phone number -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="contact-info">
+           <h3>Contactez-Nous</h3>
+           <p>Pour toute question ou demande de devis, n'hésitez pas à nous contacter. Nous sommes disponibles pour vous aider.</p>
+
+          <div class="contact-card">
+            <div class="contact-icon">📍</div> <!-- Placeholder Icon -->
+            <div class="contact-text">
+              <h4>Adresse</h4>
+              <p>123 Rue Fictive, 75000 Paris, France</p> <!-- Replace with actual address -->
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">📞</div> <!-- Placeholder Icon -->
+            <div class="contact-text">
+              <h4>Téléphone</h4>
+              <p><a href="tel:+33XXXXXXXXX"></a>+212 650-649109</p> <!-- Replace with actual phone number -->
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">✉️</div> <!-- Placeholder Icon -->
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p><a href="mailto:contact@mveservice.fr">soattimarouane@gmail.com</a></p> <!-- Replace with actual email -->
+            </div>
+          </div>
+           <div class="contact-card">
+            <div class="contact-icon">🕒</div> <!-- Placeholder Icon -->
+            <div class="contact-text">
+              <h4>Horaires d'ouverture</h4>
+              <p>Lundi - Samedi : 8h00 - 19h00<br>Urgences : 24h/24, 7j/7</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3>Envoyez-nous un message</h3>
+          <form id="contactForm" action="#" method="POST"> <!-- Add action URL when backend is ready -->
+            <div class="form-group">
+              <label for="name">Nom Complet</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Votre nom et prénom" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Adresse Email</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Votre adresse email" required>
+            </div>
+             <div class="form-group">
+              <label for="phone">Téléphone (Optionnel)</label>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="Votre numéro de téléphone">
+            </div>
+            <div class="form-group">
+              <label for="subject">Sujet</label>
+              <input type="text" id="subject" name="subject" class="form-control" placeholder="Objet de votre message" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Votre Message</label>
+              <textarea id="message" name="message" class="form-control" placeholder="Décrivez votre problème ou votre demande..." required></textarea>
+            </div>
+            <button type="submit" class="btn form-submit-btn">Envoyer le Message</button>
+          </form>
+           <p id="form-status" style="margin-top: 1rem; text-align: center;"></p> <!-- For feedback message -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+           <div class="footer-logo">
+               <img src="/MVE_service/MVE_img/MVE_logo.png" alt="MVE Service Logo Footer">
+           </div>
+          <p>Expert en hygiène et lutte antiparasitaire à Paris & IDF. Solutions rapides, efficaces et respectueuses de l'environnement.</p>
+           <div class="social-links">
+            <a href="#" class="social-link fb" aria-label="Facebook"></a> <!-- Placeholder -->
+            <a href="#" class="social-link tw" aria-label="Twitter"></a> <!-- Placeholder -->
+            <a href="#" class="social-link in" aria-label="LinkedIn"></a> <!-- Placeholder -->
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Liens Rapides</h3>
+          <ul class="footer-links">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#why-choose">Pourquoi Nous</a></li>
+            <li><a href="#testimonials">Témoignages</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Nos Prestations</h3>
+          <ul class="footer-links">
+            <li><a href="#services">Dératisation</a></li>
+            <li><a href="#services">Désinsectisation</a></li>
+            <li><a href="#services">Désinfection</a></li>
+            <li><a href="#services">Punaises de lit</a></li>
+            <li><a href="#services">Traitement Bois</a></li>
+            <li><a href="#services">Dépigeonnage</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+           <p><strong>Adresse :</strong><br>123 Rue Fictive, 75000 Paris</p>
+           <p><strong>Téléphone :</strong><br><a href="tel:+33XXXXXXXXX" style="color:#d1d5db;">+212 650-649109</a></p>
+           <p><strong>Email :</strong><br><a href="mailto:contact@mveservice.fr" style="color:#d1d5db;">soattimarouane@gmail.com</a></p>
+           <p><strong>Intervention :</strong><br> Rabat - Salé - Kénitra & partout au Maroc</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> MVE Service. Tous droits réservés. | <a href="#">Mentions Légales</a> | <a href="#">Politique de Confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Mobile Menu Toggle ---
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const navLinksMobile = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+          // ARIA attribute update
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close menu when a link is clicked (good for single-page apps)
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Optional: Close menu if clicked outside
+        document.addEventListener('click', (event) => {
+            const isClickInsideNav = menuToggle.contains(event.target) || mobileMenu.contains(event.target);
+            if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+      }
+
+      // --- Simple Testimonial Slider ---
+      const testimonialsContainer = document.getElementById('testimonial-list');
+      const dotsContainer = document.getElementById('testimonial-dots');
+
+      if (testimonialsContainer && dotsContainer) {
+        const testimonials = Array.from(testimonialsContainer.children);
+        let currentSlide = 0;
+
+        // Create dots
+        testimonials.forEach((_, index) => {
+          const dot = document.createElement('span');
+          dot.classList.add('testimonial-dot');
+          if (index === 0) {
+            dot.classList.add('active');
+          }
+          dot.addEventListener('click', () => {
+            showSlide(index);
+          });
+          dotsContainer.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsContainer.children);
+
+        function showSlide(index) {
+          testimonials.forEach((slide, i) => {
+            slide.classList.remove('active');
+             // Reset style for non-active slides (optional, depends on animation)
+             slide.style.transform = `translateX(${(i - index) * 100}%)`; // Slide effect
+          });
+          dots.forEach(dot => dot.classList.remove('active'));
+
+          testimonials[index].classList.add('active');
+           // Apply style for active slide (optional)
+           testimonials[index].style.transform = 'translateX(0)';
+          dots[index].classList.add('active');
+          currentSlide = index;
+        }
+
+         // Optional: Auto-play
+         // let autoPlayInterval = setInterval(() => {
+         //     let nextSlide = (currentSlide + 1) % testimonials.length;
+         //     showSlide(nextSlide);
+         // }, 5000); // Change slide every 5 seconds
+
+         // // Optional: Pause autoplay on hover
+         // testimonialsContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+         // testimonialsContainer.addEventListener('mouseleave', () => {
+         //     autoPlayInterval = setInterval(() => {
+         //         let nextSlide = (currentSlide + 1) % testimonials.length;
+         //         showSlide(nextSlide);
+         //     }, 5000);
+         // });
+
+
+        // Initialize first slide
+        showSlide(0);
+      }
+
+
+      // --- Update Footer Year ---
+      const yearSpan = document.getElementById('currentYear');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // --- Simple Contact Form Handler (Placeholder) ---
+      const contactForm = document.getElementById('contactForm');
+      const formStatus = document.getElementById('form-status');
+
+      if (contactForm && formStatus) {
+          contactForm.addEventListener('submit', (e) => {
+              e.preventDefault(); // Prevent actual submission for now
+              formStatus.textContent = 'Envoi en cours...';
+              formStatus.style.color = 'orange';
+
+              // Simulate network request
+              setTimeout(() => {
+                  // Replace with actual form submission logic (e.g., using fetch)
+                  console.log('Form submitted (simulated)');
+                  console.log('Name:', document.getElementById('name').value);
+                  console.log('Email:', document.getElementById('email').value);
+                   console.log('Phone:', document.getElementById('phone').value);
+                  console.log('Subject:', document.getElementById('subject').value);
+                  console.log('Message:', document.getElementById('message').value);
+
+                  // Display success message
+                  formStatus.textContent = 'Merci ! Votre message a été envoyé avec succès.';
+                  formStatus.style.color = 'green';
+                  contactForm.reset(); // Clear the form
+
+                  // Optional: Clear status message after a few seconds
+                  setTimeout(() => {
+                      formStatus.textContent = '';
+                  }, 5000);
+
+              }, 1500); // Simulate 1.5 second delay
+          });
+      }
+
+      // --- Active Nav Link Highlighting on Scroll --- (Optional but good UX)
+        const sections = document.querySelectorAll('section[id]'); // Get all sections with an ID
+        const navLinksDesktop = document.querySelectorAll('.desktop-nav a[href^="#"]');
+        const navLinksMobileAll = document.querySelectorAll('.mobile-menu a[href^="#"]');
+
+        function setActiveLink() {
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Adjust offset for sticky header height if necessary
+                const scrollPosition = window.scrollY + (document.querySelector('header')?.offsetHeight || 70) + 50; // Add offset
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            // Update Desktop Nav
+            navLinksDesktop.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                } else if (!currentSectionId && link.getAttribute('href') === '#') { // Highlight Home if at top
+                     link.classList.add('active');
+                }
+            });
+
+            // Update Mobile Nav
+             navLinksMobileAll.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                } else if (!currentSectionId && link.getAttribute('href') === '#') { // Highlight Home if at top
+                     link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveLink);
+        setActiveLink(); // Initial check on load
+
+
+    });
+  </script>
+
+</body>
+</html>
